@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Beauty Diary — ваш личный дневник ухода за собой">
+    <title>Beauty Diary — дневник ухода</title>
+    
+    <!-- Иконка сайта (если файла нет, эта строка не вызовет ошибку) -->
+    <link rel="icon" href="favicon.svg">
+    
+    <style>
+        /* ===== Базовые настройки ===== */
+        :root {
+            --primary: #1f4e79;       /* Строгий синий цвет из шаблона */
+            --primary-light: #e8f1fa;
+            --text: #333;
+            --muted: #666;
+            --border: #ccc;
+        }
+        
+        body { 
+            font-family: Arial, sans-serif; 
+            max-width: 900px;
+            margin: 0 auto; 
+            padding: 20px; 
+            line-height: 1.5; 
+            color: var(--text); 
+            background-color: #fafafa;
+        }
+        
+        h1, h2 { color: var(--primary); }
+
+        /* ===== Шапка ===== */
+        header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        /* Стили для круглой картинки (логотипа) */
+        .header-logo {
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--primary-light);
+            background: #fff;
+        }
+        header div { flex: 1; }
+        header h1 { margin: 0 0 5px 0; }
+        header p { margin: 0; color: var(--muted); }
+
+        /* ===== Навигация ===== */
+        nav { margin-bottom: 24px; }
+        nav a { 
+            margin-right: 16px; 
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.05em;
+        }
+        nav a:hover { text-decoration: underline; }
+
+        /* ===== Секции и формы ===== */
+        section { margin-bottom: 32px; }
+        
+        form, table { 
+            border: 1px solid var(--border); 
+            padding: 16px; 
+            margin-bottom: 16px; 
+            background: #fff;
+            border-radius: 6px;
+        }
+        
+        legend { 
+            font-weight: bold; 
+            color: var(--primary); 
+            font-size: 1.1em; 
+        }
+        label { 
+            display: block; 
+            margin-top: 12px; 
+            font-weight: bold; 
+        }
+        
+        /* Поля ввода */
+        input[type="text"], 
+        input[type="number"], 
+        input[type="date"], 
+        textarea, 
+        select {
+            width: 100%;
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            box-sizing: border-box;
+            font-family: inherit;
+        }
+        
+        /* Кнопки */
+        button {
+            margin-top: 16px;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        button[type="submit"] { background: var(--primary); color: #fff; }
+        button[type="submit"]:hover { background: #163b5c; }
+        button[type="reset"] { background: #e0e0e0; color: #333; margin-left: 10px; }
+        button[type="reset"]:hover { background: #d0d0d0; }
+
+        /* ===== Таблица ===== */
+        table { 
+            width: 100%;
+            border-collapse: collapse; 
+            padding: 0;
+        }
+        table, th, td { border: 1px solid var(--border); }
+        th, td { padding: 10px; text-align: left; }
+        th { background: var(--primary-light); color: var(--primary); }
+        caption {
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 8px;
+            color: var(--muted);
+        }
+
+        /* ===== Помощь (Контакты и шкалы) ===== */
+        .contacts-box {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .contacts-box h3 {
+            margin-top: 0;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+        .contacts-box p { margin: 5px 0; }
+        .contacts-box a { color: var(--primary); text-decoration: none; }
+        .contacts-box a:hover { text-decoration: underline; }
+
+        .progress-wrapper {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 16px;
+            margin-bottom: 16px;
+        }
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            font-weight: bold;
+            margin-bottom: 8px;
+        }
+        
+        progress {
+            width: 100%;
+            height: 18px;
+            border-radius: 9px;
+            border: none;
+            background-color: #e0e0e0;
+        }
+        progress::-webkit-progress-bar {
+            background-color: #e0e0e0;
+            border-radius: 9px;
+        }
+        progress::-webkit-progress-value {
+            background-color: var(--primary);
+            border-radius: 9px;
+        }
+        meter {
+            width: 100%;
+            height: 20px;
+            border-radius: 10px;
+        }
+
+        /* ===== Блоки details ===== */
+        details {
+            background: #fff;
+            border: 1px solid var(--border);
+            border-radius: 6px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+        summary {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--primary);
+        }
+        details p { margin-top: 10px; color: var(--muted); }
+
+        /* ===== Подвал ===== */
+        footer { 
+            text-align: center; 
+            color: var(--muted); 
+            margin-top: 40px; 
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        footer a { color: var(--primary); text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <!-- ===== ШАПКА (Ваша картинка) ===== -->
+    <header>
+        <!-- Обязательно положите файл beauty.jpg в папку с index.html -->
+        <img src="уход за собой.jpg" alt="Логотип Beauty Diary" width="100" height="100" class="header-logo">
+        <div>
+            <h1>Beauty Diary</h1>
+            <p>Твой личный дневник ухода за собой. Пока это интерфейс — хранение добавим позже.</p>
+        </div>
+    </header>
+
+    <!-- ===== НАВИГАЦИЯ ===== -->
+    <nav>
+        <a href="#add">Добавить средство</a>
+        <a href="#data">Моя полка</a>
+        <a href="#help">Помощь</a>
+        <!-- Ваша ссылка на GitHub -->
+        <a href="https://github.com/valeria11788" target="_blank">Мой GitHub</a>
+    </nav>
+
+    <main>
+
+        <!-- ===== ФОРМА ДОБАВЛЕНИЯ ===== -->
+        <section id="add">
+            <h2>Новое средство</h2>
+            <form action="#" method="get">
+                <fieldset>
+                    <legend>Данные средства</legend>
+                    
+                    <label for="title">Название</label>
+                    <input type="text" id="title" name="title"
+                           placeholder="Например: увлажняющий крем" required>
+
+                    <label for="desc">Описание</label>
+                    <textarea id="desc" name="desc" rows="3"
+                              placeholder="Какой эффект? Подходит ли для кожи?"></textarea>
+
+                    <label for="cat">Категория</label>
+                    <select id="cat" name="cat">
+                        <option value="face">Уход за лицом</option>
+                        <option value="body">Уход за телом</option>
+                        <option value="hair">Уход за волосами</option>
+                        <option value="makeup">Декоративная косметика</option>
+                    </select>
+
+                    <label for="date">Срок / Дата покупки</label>
+                    <input type="date" id="date" name="date">
+
+                    <label for="priority">Приоритет (1 — срочно, 5 — можно подождать)</label>
+                    <input type="number" id="priority" name="priority" min="1" max="5" value="3">
+
+                    <button type="submit">Добавить</button>
+                    <button type="reset">Очистить</button>
+                </fieldset>
+            </form>
+        </section>
+
+        <!-- ===== ТАБЛИЦА ===== -->
+        <section id="data">
+            <h2>Моя полка</h2>
+            <table>
+                <caption>Пример наполнения интерфейса</caption>
+                <thead>
+                    <tr>
+                        <th>Название</th>
+                        <th>Категория</th>
+                        <th>Срок</th>
+                        <th>Приоритет</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Купить крем для лица</td>
+                        <td>Уход за лицом</td>
+                        <td>2026-10-01</td>
+                        <td>1</td>
+                    </tr>
+                    <tr>
+                        <td>Маска для волос</td>
+                        <td>Уход за волосами</td>
+                        <td>2026-09-25</td>
+                        <td>3</td>
+                    </tr>
+                    <tr>
+                        <td>Скраб для тела</td>
+                        <td>Уход за телом</td>
+                        <td>2026-09-28</td>
+                        <td>2</td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="4">Всего средств: 3 (пока это пример — реальные данные добавим позже)</td>
+                    </tr>
+                </tfoot>
+            </table>
+        </section>
+
+        <!-- ===== ПОМОЩЬ (Только контакты и шкалы, без картинки) ===== -->
+        <section id="help">
+            <h2>Помощь</h2>
+
+            <!-- Блок с контактами -->
+            <div class="contacts-box">
+                <h3>Техническая поддержка</h3>
+                <p>E-mail: <a href="mailto:support@beauty-diary.ru">support@beauty-diary.ru</a></p>
+                <p>Телефон: <a href="tel:+79991234567">+7 (999) 123-45-67</a></p>
+            </div>
+
+            <!-- Шкала прогресса с процентами -->
+            <div class="progress-wrapper">
+                <div class="progress-label">
+                    <span>Профиль заполнен на:</span>
+                    <span>70%</span>
+                </div>
+                <progress id="profile" max="100" value="70">70%</progress>
+            </div>
+
+            <!-- Шкала важности -->
+            <div class="progress-wrapper">
+                <div class="progress-label">
+                    <span>Важность (1 — низкая, 5 — высокая)</span>
+                    <span>4 из 5</span>
+                </div>
+                <meter id="importance" min="1" max="5" value="4" optimum="5">4 из 5</meter>
+            </div>
+
+            <!-- Раскрывающиеся блоки -->
+            <details>
+                <summary>Как добавить средство?</summary>
+                <p>Заполните форму выше и нажмите «Добавить». Пока данные никуда не сохраняются — в следующих работах добавим JavaScript.</p>
+            </details>
+
+            <details>
+                <summary>Что дальше?</summary>
+                <p>В следующих лабораторных оживим интерфейс и научимся сохранять данные.</p>
+            </details>
+        </section>
+
+    </main>
+
+    <!-- ===== ПОДВАЛ ===== -->
+    <footer>
+        <p>© 2026, Валерия · <a href="mailto:valeria@example.com">valeria@example.com</a></p>
+    </footer>
+
+</body>
+</html>
